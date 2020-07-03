@@ -1,14 +1,9 @@
 package com.decerto.recruit82513.core.Exception;
 
-import com.decerto.recruit82513.service.GetAndProcessDataServiceImpl;
 import lombok.Getter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Getter
 public class Recruit82513Exception extends RuntimeException {
-
-    private final static Logger logger = LoggerFactory.getLogger(GetAndProcessDataServiceImpl.class);
 
     private int responseStatus;
     private Object responseBody;
@@ -34,11 +29,7 @@ public class Recruit82513Exception extends RuntimeException {
         }
 
         public Recruit82513Exception build() {
-            logger.error(this.responseBody.toString());
             return new Recruit82513Exception(this);
         }
-
-
-
     }
 }

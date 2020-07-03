@@ -1,7 +1,7 @@
-package com.decerto.recruit82513.controllers;
+package com.decerto.recruit82513.core.controllers;
 
+import com.decerto.recruit82513.core.GetAndProcessDataExecutor;
 import com.decerto.recruit82513.core.dto.ResponseObjectDTO;
-import com.decerto.recruit82513.service.GetAndProcessDataService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class GetScoreDataController {
 
-    GetAndProcessDataService getAndProcessDataService;
+    GetAndProcessDataExecutor getAndProcessDataExecutor;
 
     @GetMapping
     public ResponseEntity<ResponseObjectDTO> process(@RequestParam String getDataStrategy, @RequestParam String processDataStrategy ) {
 
-        ResponseObjectDTO responseObjectDTO = getAndProcessDataService.getAndProcessData(getDataStrategy, processDataStrategy);
+        ResponseObjectDTO responseObjectDTO = getAndProcessDataExecutor.getAndProcessData(getDataStrategy, processDataStrategy);
 
         return ResponseEntity.ok().body(responseObjectDTO);
     }

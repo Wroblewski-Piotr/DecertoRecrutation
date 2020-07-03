@@ -1,13 +1,12 @@
 package com.decerto.recruit82513.core.strategy;
 
-import com.decerto.recruit82513.core.model.AcceptValueDescription;
 
-import java.util.List;
+import com.decerto.recruit82513.core.model.TypeDefinition;
 
 /**
  * Serwis definiujący warstwę przetwarzania danych
  *
- * @param <T> - Typ obiektów które zostaną przetworzone
+ * @param <T> - Typ obiektu który zostanie przetworzony
  * @param <V> - Typ obiektu będącego wynikiem
  *
  * @author Piotr Wróblewski
@@ -15,17 +14,18 @@ import java.util.List;
 public interface ProcessDataStrategy<T, V> {
 
     /**
-     * Metoda przetwarzajaca dane dostarczone w postaci listy obiektów typu T
+     * Metoda przetwarzajaca dane dostarczone w postaci obiektu typu T
      *
-     * @param valuesBeforeProcessing - Lista obiektów które zostaną przetworzone
+     * @param dataBeforeProcessing - obiekt przed przeprocesowniem
      * @return - obiekt będący wynikiem
      */
-    V processData(List<T> valuesBeforeProcessing);
+    V processData(T dataBeforeProcessing);
 
     /**
-     * metoda zwracająca Objekt harakteryzujący dane akceptowane przez implementacje
+     * Definicja metody zwracającej obiekt określający akceptowany typ z uwzględnieniem generycznych parametrów
      *
-     * @return
+     * @return obiekt typu TypeDefinition określający akceptowany typ
      */
-    AcceptValueDescription getProcessDataStrategyAcceptValueDescriptionModel();
+    TypeDefinition getAcceptableTypeDefinition();
+
 }

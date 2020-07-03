@@ -1,41 +1,69 @@
 package com.decerto.recruit82513.strategyImpl.getDataStrategyImpl;
 
-import com.decerto.recruit82513.core.model.ReturnValueDescription;
+import com.decerto.recruit82513.core.model.TypeDefinition;
 import com.decerto.recruit82513.core.strategy.GetDataStrategy;
+import com.decerto.recruit82513.model.Pair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 @Component("GetTwoIntegersFromApiStrategyV1")
-public class GetTwoIntegersFromApiStrategyV1 implements GetDataStrategy<Integer> {
+public class GetTwoIntegersFromApiStrategyV1 implements GetDataStrategy<Pair<Integer>> {
 
-    private final ReturnValueDescription getDataStrategyReturnValueDescriptionModel =
-            new ReturnValueDescription.builder()
-                    .isHaveDefinedNumberOfReturnValues(true)
-                    .numberOfReturnValues(2)
-                    .isHaveDefinedReturnValueType(true)
-                    .returnValueType(Integer.class)
+    private final static Logger logger = LoggerFactory.getLogger(GetTwoIntegersFromApiStrategyV1.class);
+
+    TypeDefinition returnTypeDefinition =
+            new TypeDefinition.builder()
+                    .clazz(Pair.class)
+                    .addGenericParameter(
+                            new TypeDefinition.builder()
+                                    .clazz(Integer.class)
+                                    .build()
+                    )
                     .build();
 
     @Override
-    public List<Integer> getData() {
+    public Pair<Integer> getData() {
 
-        List<Integer> randomIntegersList = new LinkedList<>();
+        logger.info("-----------------------------------------");
+        logger.info("Wywołanie " + this.getClass().getSimpleName());
 
-        Random generator = new Random();
         int min=0;
         int max=100;
 
-        randomIntegersList.add(generator.nextInt(max - min) + min);
-        randomIntegersList.add(generator.nextInt(max - min) + min);
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "https://www.random.org/integers/?num=2&min=" + min + "&max=" + max + "&col=1&base=10&format=plain&rnd=new";
+        String integersAsString = restTemplate.getForEntity(url, String.class).getBody();
 
-        return randomIntegersList;
+        List<Integer> integersList = convertPlainTextResponseToList(integersAsString);
+
+        int var1 = integersList.get(0);
+        int var2 = integersList.get(1);
+
+        Pair<Integer> score = new Pair(var1, var2);
+
+        logger.info("Wygenerowany objekt - " + score.toString());
+
+        return score;
     }
 
     @Override
-    public ReturnValueDescription getDataStrategyReturnValueDescriptionModel() {
-        return getDataStrategyReturnValueDescriptionModel;
+    public TypeDefinition getReturnTypeDefinition() {
+        return returnTypeDefinition;
     }
+
+
+    private List<Integer> convertPlainTextResponseToList(String integersAsString) {
+
+        List<Integer> convertedList = new ArrayList<>();
+        Arrays.asList(integersAsString.split("\\r?\\n")).forEach(s -> convertedList.add(Integer.valueOf(s)));
+
+        return convertedList;
+    }
+
 }

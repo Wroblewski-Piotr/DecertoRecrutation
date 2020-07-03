@@ -1,8 +1,7 @@
 package com.decerto.recruit82513.core.strategy;
 
-import com.decerto.recruit82513.core.model.ReturnValueDescription;
 
-import java.util.List;
+import com.decerto.recruit82513.core.model.TypeDefinition;
 
 /**
  * Serwis definujacy warstwę pozyskiwania danych
@@ -14,16 +13,16 @@ import java.util.List;
 public interface GetDataStrategy<T> {
 
     /**
-     * Definicja metody dostarczającej listę danych typu T
+     * Definicja metody dostarczającej dane typu T
      *
      * @return Lista danych typu T
      */
-    List<T> getData();
+    T getData();
 
     /**
-     * metoda zwracająca Objekt harakteryzujący dane zwracane przez implementacje
+     * Definicja metody zwracającej obiekt określający zwracany typ z uwzględnieniem generycznych parametrów
      *
-     * @return
+     * @return obiekt typu TypeDefinition określający zwracany typ
      */
-    ReturnValueDescription getDataStrategyReturnValueDescriptionModel();
+    TypeDefinition getReturnTypeDefinition();
 }

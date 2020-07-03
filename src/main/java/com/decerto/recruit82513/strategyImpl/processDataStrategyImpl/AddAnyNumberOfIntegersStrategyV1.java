@@ -2,20 +2,20 @@ package com.decerto.recruit82513.strategyImpl.processDataStrategyImpl;
 
 import com.decerto.recruit82513.core.model.TypeDefinition;
 import com.decerto.recruit82513.core.strategy.ProcessDataStrategy;
-import com.decerto.recruit82513.model.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 
-@Component("AddTwoIntegersStrategyV1")
-public class AddTwoIntegersStrategyV1 implements ProcessDataStrategy<Pair<Integer>, Integer> {
+@Component("AddAnyNumberOfIntegersStrategyV1")
+public class AddAnyNumberOfIntegersStrategyV1 implements ProcessDataStrategy<List<Integer>, Integer> {
 
-    private final static Logger logger = LoggerFactory.getLogger(AddTwoIntegersStrategyV1.class);
+    private final static Logger logger = LoggerFactory.getLogger(AddAnyNumberOfIntegersStrategyV1.class);
 
     TypeDefinition acceptableTypeDefinition =
             new TypeDefinition.builder()
-                    .clazz(Pair.class)
+                    .clazz(List.class)
                     .addGenericParameter(
                             new TypeDefinition.builder()
                                     .clazz(Integer.class)
@@ -24,12 +24,15 @@ public class AddTwoIntegersStrategyV1 implements ProcessDataStrategy<Pair<Intege
                     .build();
 
     @Override
-    public Integer processData(Pair<Integer> integerPair) {
+    public Integer processData(List<Integer> dataBeforeProcessing) {
 
         logger.info("Wywołanie " + this.getClass().getSimpleName());
-        logger.info("przyjęte dane - " + integerPair.toString());
+        logger.info("przyjęte dane - " + dataBeforeProcessing.toString());
 
-        Integer score = integerPair.getVar1() + integerPair.getVar2();
+        Integer score = 0;
+        for(Integer integer: dataBeforeProcessing) {
+            score = score + integer;
+        }
 
         logger.info("Wygenerowany objekt - " + score.toString());
         logger.info("-----------------------------------------");
@@ -41,5 +44,4 @@ public class AddTwoIntegersStrategyV1 implements ProcessDataStrategy<Pair<Intege
     public TypeDefinition getAcceptableTypeDefinition() {
         return acceptableTypeDefinition;
     }
-
 }
