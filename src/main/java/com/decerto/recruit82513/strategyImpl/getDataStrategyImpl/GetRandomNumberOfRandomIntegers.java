@@ -1,7 +1,8 @@
 package com.decerto.recruit82513.strategyImpl.getDataStrategyImpl;
 
+import com.decerto.recruit82513.core.model.Nothing;
 import com.decerto.recruit82513.core.model.TypeDefinition;
-import com.decerto.recruit82513.core.strategy.GetDataStrategy;
+import com.decerto.recruit82513.core.Strategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -10,12 +11,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-@Component("GetAnyNumberOfRandomIntegersStrategyV1")
-public class GetAnyNumberOfRandomIntegersStrategyV1 implements GetDataStrategy<List<Integer>> {
+@Component("GetRandomNumberOfRandomIntegers")
+public class GetRandomNumberOfRandomIntegers implements Strategy<Nothing, List<Integer>> {
 
-    private final static Logger logger = LoggerFactory.getLogger(GetTwoIntegersFromApiStrategyV1.class);
+    private final static Logger logger = LoggerFactory.getLogger(GetTwoIntegersFromApi.class);
 
-    TypeDefinition acceptableTypeDefinition =
+    private final TypeDefinition acceptableTypeDefinition =
+            new TypeDefinition.builder()
+                    .clazz(Nothing.class)
+                    .build();
+
+    private final TypeDefinition returnTypeDefinition =
             new TypeDefinition.builder()
                     .clazz(List.class)
                     .addGenericParameter(
@@ -25,8 +31,10 @@ public class GetAnyNumberOfRandomIntegersStrategyV1 implements GetDataStrategy<L
                     )
                     .build();
 
+    private final String description = "Tworzy listę Integerów o losowej długości, wypełnioną losowymi danymi";
+
     @Override
-    public List<Integer> getData() {
+    public List<Integer> processData(Nothing nothing) {
 
         logger.info("-----------------------------------------");
         logger.info("Wywołanie " + this.getClass().getSimpleName());
@@ -49,7 +57,15 @@ public class GetAnyNumberOfRandomIntegersStrategyV1 implements GetDataStrategy<L
     }
 
     @Override
-    public TypeDefinition getReturnTypeDefinition() {
+    public String getStrategyDescription() { return description; }
+
+    @Override
+    public TypeDefinition getAcceptableTypeDefinition() {
         return acceptableTypeDefinition;
+    }
+
+    @Override
+    public TypeDefinition getReturnTypeDefinition() {
+        return returnTypeDefinition;
     }
 }

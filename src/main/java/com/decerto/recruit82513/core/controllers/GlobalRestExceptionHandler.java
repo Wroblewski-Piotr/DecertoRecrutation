@@ -1,4 +1,4 @@
-package com.decerto.recruit82513.core;
+package com.decerto.recruit82513.core.controllers;
 
 import com.decerto.recruit82513.core.Exception.Recruit82513Exception;
 import org.springframework.http.ResponseEntity;

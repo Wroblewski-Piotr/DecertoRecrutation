@@ -13,6 +13,13 @@ public class Recruit82513Exception extends RuntimeException {
         this.responseStatus = builder.responseStatus;
     }
 
+    public static Recruit82513Exception getRecruit82513ExceptionWithStatus400(Object responseBody) {
+        return new Recruit82513Exception.builder()
+                .responsetatus(400)
+                .responseBody(responseBody)
+                .build();
+    }
+
     public static class builder {
 
         private int responseStatus;

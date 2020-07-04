@@ -1,4 +1,4 @@
-package com.decerto.recruit82513.core.strategy;
+package com.decerto.recruit82513.core;
 
 
 import com.decerto.recruit82513.core.model.TypeDefinition;
@@ -6,12 +6,12 @@ import com.decerto.recruit82513.core.model.TypeDefinition;
 /**
  * Serwis definiujący warstwę przetwarzania danych
  *
- * @param <T> - Typ obiektu który zostanie przetworzony
- * @param <V> - Typ obiektu będącego wynikiem
+ * @param <T> - Typ obiektu przyjmowanego
+ * @param <V> - Typ obiektu zwracanego
  *
  * @author Piotr Wróblewski
  */
-public interface ProcessDataStrategy<T, V> {
+public interface Strategy<T, V> {
 
     /**
      * Metoda przetwarzajaca dane dostarczone w postaci obiektu typu T
@@ -21,11 +21,26 @@ public interface ProcessDataStrategy<T, V> {
      */
     V processData(T dataBeforeProcessing);
 
+
+    /**
+     * Metoda zwracająca opis działania strategii
+     *
+     * @return opis ziałania strategii
+     */
+    String getStrategyDescription();
+
     /**
      * Definicja metody zwracającej obiekt określający akceptowany typ z uwzględnieniem generycznych parametrów
      *
      * @return obiekt typu TypeDefinition określający akceptowany typ
      */
     TypeDefinition getAcceptableTypeDefinition();
+
+    /**
+     * Definicja metody zwracającej obiekt określający zwracany typ z uwzględnieniem generycznych parametrów
+     *
+     * @return obiekt typu TypeDefinition określający zwracany typ
+     */
+    TypeDefinition getReturnTypeDefinition();
 
 }

@@ -1,8 +1,8 @@
 package com.decerto.recruit82513.strategyImpl.getDataStrategyImpl;
 
+import com.decerto.recruit82513.core.model.Nothing;
 import com.decerto.recruit82513.core.model.TypeDefinition;
-import com.decerto.recruit82513.core.strategy.GetDataStrategy;
-import com.decerto.recruit82513.model.Pair;
+import com.decerto.recruit82513.core.Strategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -12,14 +12,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Component("GetTwoIntegersFromApiStrategyV1")
-public class GetTwoIntegersFromApiStrategyV1 implements GetDataStrategy<Pair<Integer>> {
+@Component("GetTwoIntegersFromApi")
+public class GetTwoIntegersFromApi implements Strategy<Nothing, List<Integer>> {
 
-    private final static Logger logger = LoggerFactory.getLogger(GetTwoIntegersFromApiStrategyV1.class);
+    private final static Logger logger = LoggerFactory.getLogger(GetTwoIntegersFromApi.class);
 
-    TypeDefinition returnTypeDefinition =
+    private final TypeDefinition acceptableTypeDefinition =
             new TypeDefinition.builder()
-                    .clazz(Pair.class)
+                    .clazz(Nothing.class)
+                    .build();
+
+    private final TypeDefinition returnTypeDefinition =
+            new TypeDefinition.builder()
+                    .clazz(List.class)
                     .addGenericParameter(
                             new TypeDefinition.builder()
                                     .clazz(Integer.class)
@@ -27,8 +32,10 @@ public class GetTwoIntegersFromApiStrategyV1 implements GetDataStrategy<Pair<Int
                     )
                     .build();
 
+    private final String description = "Tworzy obiekt typu List na podstawie dwuch Integerów pobranych z zewnętrznego api";
+
     @Override
-    public Pair<Integer> getData() {
+    public List<Integer> processData(Nothing nothing) {
 
         logger.info("-----------------------------------------");
         logger.info("Wywołanie " + this.getClass().getSimpleName());
@@ -42,15 +49,16 @@ public class GetTwoIntegersFromApiStrategyV1 implements GetDataStrategy<Pair<Int
 
         List<Integer> integersList = convertPlainTextResponseToList(integersAsString);
 
-        int var1 = integersList.get(0);
-        int var2 = integersList.get(1);
+        logger.info("Wygenerowany objekt - " + integersList.toString());
 
-        Pair<Integer> score = new Pair(var1, var2);
-
-        logger.info("Wygenerowany objekt - " + score.toString());
-
-        return score;
+        return integersList;
     }
+
+    @Override
+    public String getStrategyDescription() { return description; }
+
+    @Override
+    public TypeDefinition getAcceptableTypeDefinition() { return acceptableTypeDefinition; }
 
     @Override
     public TypeDefinition getReturnTypeDefinition() {

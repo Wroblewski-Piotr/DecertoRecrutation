@@ -1,22 +1,29 @@
 package com.decerto.recruit82513.strategyImpl.getDataStrategyImpl;
 
+import com.decerto.recruit82513.core.model.Nothing;
 import com.decerto.recruit82513.core.model.TypeDefinition;
-import com.decerto.recruit82513.core.strategy.GetDataStrategy;
-import com.decerto.recruit82513.model.Pair;
+import com.decerto.recruit82513.core.Strategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
-@Component("GetTwoIntegersFromRandomStrategyV1")
-public class GetTwoIntegersFromRandomStrategyV1 implements GetDataStrategy<Pair<Integer>> {
+@Component("GetTwoIntegersFromRandom")
+public class GetTwoIntegersFromRandom implements Strategy<Nothing, List<Integer>> {
 
-    private final static Logger logger = LoggerFactory.getLogger(GetTwoIntegersFromRandomStrategyV1.class);
+    private final static Logger logger = LoggerFactory.getLogger(GetTwoIntegersFromRandom.class);
 
-    TypeDefinition returnTypeDefinition =
+    private final TypeDefinition acceptableTypeDefinition =
             new TypeDefinition.builder()
-                    .clazz(Pair.class)
+                    .clazz(Nothing.class)
+                    .build();
+
+    private final TypeDefinition returnTypeDefinition =
+            new TypeDefinition.builder()
+                    .clazz(List.class)
                     .addGenericParameter(
                             new TypeDefinition.builder()
                                     .clazz(Integer.class)
@@ -24,8 +31,10 @@ public class GetTwoIntegersFromRandomStrategyV1 implements GetDataStrategy<Pair<
                     )
                     .build();
 
+    private final String description = "Tworzy obiekt typu List na podstawie dwuch Integerów wygenerowanych losowo";
+
     @Override
-    public Pair<Integer> getData() {
+    public List<Integer> processData(Nothing nothing) {
 
         logger.info("-----------------------------------------");
         logger.info("Wywołanie " + this.getClass().getSimpleName());
@@ -37,12 +46,20 @@ public class GetTwoIntegersFromRandomStrategyV1 implements GetDataStrategy<Pair<
         int var1 = generator.nextInt(max - min) + min;
         int var2 = generator.nextInt(max - min) + min;
 
-        Pair<Integer> score = new Pair(var1, var2);
+        List<Integer> score = new LinkedList<>();
+        score.add(var1);
+        score.add(var2);
 
         logger.info("Wygenerowany objekt - " + score.toString());
 
         return score;
     }
+
+    @Override
+    public String getStrategyDescription() { return description; }
+
+    @Override
+    public TypeDefinition getAcceptableTypeDefinition() { return acceptableTypeDefinition; }
 
     @Override
     public TypeDefinition getReturnTypeDefinition() {
