@@ -1,5 +1,6 @@
 package com.decerto.recruit82513.strategyImpl.getDataStrategyImpl;
 
+import com.decerto.recruit82513.core.adnotations.LogableGenerateDataStrategyImpl;
 import com.decerto.recruit82513.core.modelAndDTO.Nothing;
 import com.decerto.recruit82513.core.modelAndDTO.TypeDefinition;
 import com.decerto.recruit82513.core.Strategy;
@@ -34,10 +35,8 @@ public class GetRandomNumberOfRandomIntegers implements Strategy<Nothing, List<I
     private final String description = "Tworzy listę Integerów o losowej długości, wypełnioną losowymi danymi";
 
     @Override
+    @LogableGenerateDataStrategyImpl
     public List<Integer> processData(Nothing nothing) {
-
-        logger.info("-----------------------------------------");
-        logger.info("Wywołanie " + this.getClass().getSimpleName());
 
         Random generator = new Random();
         int numberOfIntegers = generator.nextInt(25);
@@ -50,8 +49,6 @@ public class GetRandomNumberOfRandomIntegers implements Strategy<Nothing, List<I
         for(int i=0; i<numberOfIntegers; i++) {
             score.add(generator.nextInt(max - min) + min);
         }
-
-        logger.info("Wygenerowany objekt - " + score.toString());
 
         return score;
     }

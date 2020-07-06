@@ -1,6 +1,7 @@
 package com.decerto.recruit82513.strategyImpl.processDataStrategyImpl;
 
 import com.decerto.recruit82513.core.Strategy;
+import com.decerto.recruit82513.core.adnotations.LogableProcessDataStrategyImpl;
 import com.decerto.recruit82513.core.modelAndDTO.TypeDefinition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,14 +25,10 @@ public class ConvertIntegerToString implements Strategy<Integer, String> {
     private final String description = "Konwertuje objekt typu Integer na objekt typu String";
 
     @Override
+    @LogableProcessDataStrategyImpl
     public String processData(Integer dataBeforeProcessing) {
 
-        logger.info("Wywołanie " + this.getClass().getSimpleName());
-        logger.info("przyjęte dane - " + dataBeforeProcessing.toString());
-
         String score = dataBeforeProcessing.toString();
-
-        logger.info("Wygenerowany objekt - " + score);
 
         return score;
     }

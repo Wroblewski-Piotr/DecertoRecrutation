@@ -2,6 +2,7 @@ package com.decerto.recruit82513.core;
 
 
 import com.decerto.recruit82513.core.modelAndDTO.TypeDefinition;
+import org.springframework.stereotype.Component;
 
 /**
  * Serwis definiujący warstwę przetwarzania danych
@@ -42,5 +43,15 @@ public interface Strategy<T, V> {
      * @return obiekt typu TypeDefinition określający zwracany typ
      */
     TypeDefinition getReturnTypeDefinition();
+
+
+    /**
+     * Zwraca Qualifier beana będącego implementacją interface Strategy
+     *
+     * @return Qualifier beana będącego implementacją interface Strategy
+     */
+    default String getStrategyQualifier() {
+        return this.getClass().getAnnotation(Component.class).value();
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.decerto.recruit82513.strategyImpl.getDataStrategyImpl;
 
+import com.decerto.recruit82513.core.adnotations.LogableGenerateDataStrategyImpl;
 import com.decerto.recruit82513.core.modelAndDTO.Nothing;
 import com.decerto.recruit82513.core.modelAndDTO.TypeDefinition;
 import com.decerto.recruit82513.core.Strategy;
@@ -34,10 +35,8 @@ public class GetTwoIntegersFromRandom implements Strategy<Nothing, List<Integer>
     private final String description = "Tworzy obiekt typu List na podstawie dwóch Integerów wygenerowanych losowo";
 
     @Override
+    @LogableGenerateDataStrategyImpl()
     public List<Integer> processData(Nothing nothing) {
-
-        logger.info("-----------------------------------------");
-        logger.info("Wywołanie " + this.getClass().getSimpleName());
 
         Random generator = new Random();
         int min=0;
@@ -49,8 +48,6 @@ public class GetTwoIntegersFromRandom implements Strategy<Nothing, List<Integer>
         List<Integer> score = new LinkedList<>();
         score.add(var1);
         score.add(var2);
-
-        logger.info("Wygenerowany objekt - " + score.toString());
 
         return score;
     }

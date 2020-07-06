@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.decerto.recruit82513.Recruit82513ApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.107 s - in com.decerto.recruit82513.Recruit82513ApplicationTests

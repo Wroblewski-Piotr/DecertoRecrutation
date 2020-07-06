@@ -1,5 +1,6 @@
 package com.decerto.recruit82513.strategyImpl.getDataStrategyImpl;
 
+import com.decerto.recruit82513.core.adnotations.LogableGenerateDataStrategyImpl;
 import com.decerto.recruit82513.core.modelAndDTO.Nothing;
 import com.decerto.recruit82513.core.modelAndDTO.TypeDefinition;
 import com.decerto.recruit82513.core.Strategy;
@@ -35,10 +36,8 @@ public class GetTwoIntegersFromApi implements Strategy<Nothing, List<Integer>> {
     private final String description = "Tworzy obiekt typu List na podstawie dwóch Integerów pobranych z zewnętrznego api";
 
     @Override
+    @LogableGenerateDataStrategyImpl()
     public List<Integer> processData(Nothing nothing) {
-
-        logger.info("-----------------------------------------");
-        logger.info("Wywołanie " + this.getClass().getSimpleName());
 
         int min=0;
         int max=100;
@@ -48,8 +47,6 @@ public class GetTwoIntegersFromApi implements Strategy<Nothing, List<Integer>> {
         String integersAsString = restTemplate.getForEntity(url, String.class).getBody();
 
         List<Integer> integersList = convertPlainTextResponseToList(integersAsString);
-
-        logger.info("Wygenerowany objekt - " + integersList.toString());
 
         return integersList;
     }

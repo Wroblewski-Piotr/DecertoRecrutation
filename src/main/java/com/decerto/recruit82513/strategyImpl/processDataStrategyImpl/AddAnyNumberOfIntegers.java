@@ -1,5 +1,6 @@
 package com.decerto.recruit82513.strategyImpl.processDataStrategyImpl;
 
+import com.decerto.recruit82513.core.adnotations.LogableProcessDataStrategyImpl;
 import com.decerto.recruit82513.core.modelAndDTO.TypeDefinition;
 import com.decerto.recruit82513.core.Strategy;
 import org.slf4j.Logger;
@@ -31,17 +32,13 @@ public class AddAnyNumberOfIntegers implements Strategy<List<Integer>, Integer> 
     private final String description = "Przyjmuję listę integerów i sumuje wszystkie jej pozycje";
 
     @Override
+    @LogableProcessDataStrategyImpl
     public Integer processData(List<Integer> dataBeforeProcessing) {
-
-        logger.info("Wywołanie " + this.getClass().getSimpleName());
-        logger.info("przyjęte dane - " + dataBeforeProcessing.toString());
 
         Integer score = 0;
         for(Integer integer: dataBeforeProcessing) {
             score = score + integer;
         }
-
-        logger.info("Wygenerowany objekt - " + score.toString());
 
         return score;
     }

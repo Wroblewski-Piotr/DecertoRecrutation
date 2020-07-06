@@ -38,9 +38,9 @@ public class ValidateStrategyCompabilityUtils {
 
             errorComunicate =
                     "Strategia - "
-                            + firstStrategy.getClass().getSimpleName()
+                            + firstStrategy.getStrategyQualifier()
                             + ", oraz strategia - "
-                            + secondStrategy.getClass().getSimpleName()
+                            + secondStrategy.getStrategyQualifier()
                             + " nie są ze sobą niekompatybilne pod względem typu przekazywanych danych"
                             + firstStrategy.getReturnTypeDefinition() + "(Typ zwracany pierwszej strategi)"
                             + " != "
