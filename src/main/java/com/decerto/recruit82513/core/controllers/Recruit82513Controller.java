@@ -2,9 +2,10 @@ package com.decerto.recruit82513.core.controllers;
 
 import com.decerto.recruit82513.core.Executor.GetAndProcessDataExecutor;
 import com.decerto.recruit82513.core.Strategy;
-import com.decerto.recruit82513.core.model.Nothing;
-import com.decerto.recruit82513.core.model.StrategyProcessScore;
-import com.decerto.recruit82513.core.model.TypeDefinition;
+import com.decerto.recruit82513.core.modelAndDTO.Nothing;
+import com.decerto.recruit82513.core.modelAndDTO.StrategyDTO;
+import com.decerto.recruit82513.core.modelAndDTO.StrategyProcessScore;
+import com.decerto.recruit82513.core.modelAndDTO.TypeDefinition;
 import com.decerto.recruit82513.core.utils.GetStrategyByQualifierUtil;
 import com.decerto.recruit82513.core.utils.ValidateStrategyCompabilityUtils;
 import org.springframework.context.ApplicationContext;
@@ -52,34 +53,35 @@ public class Recruit82513Controller {
      * @return lista qualifier'ów strategii kompatybilnych do strategyQualifier
      */
     @GetMapping(value = "getCompatibleStrategies")
-    List<String> getCompatibleStrategies(@RequestParam String strategyQualifier) {
+    List<StrategyDTO> getCompatibleStrategies(@RequestParam String strategyQualifier) {
 
-        List<String> compatibleStrategiesListQualifiers;
+        List<StrategyDTO> compatibleStrategiesList;
 
         Strategy strategyFromRequest = GetStrategyByQualifierUtil.findStrategyByQualifier(context, strategyQualifier, true);
 
-        compatibleStrategiesListQualifiers = allStrategies.stream()
+        compatibleStrategiesList = allStrategies.stream()
                 .filter(strategy -> ValidateStrategyCompabilityUtils.validateCompabilityOfTwoStrategy(strategyFromRequest, strategy) == null)
-                .map(strategy -> strategy.getClass().getSimpleName())
+                .map(StrategyDTO::new)
                 .collect(Collectors.toList());
 
-        return compatibleStrategiesListQualifiers;
+        return compatibleStrategiesList;
     }
 
     /**
      *
-     * Kontroler zwracający listę strategii generujących dane. przez strategię generującą dane należy rozumieć taką krurej metoda processData przyjmuje jak orgument objekt typu Nothing
+     * Kontroler zwracający listę strategii generujących dane. przez strategię generującą dane
+     * należy rozumieć taką której metoda processData przyjmuje jako argument objekt typu Nothing
      *
      * @return Lista strategi generujących dane
      */
-    @GetMapping(value = "getGenerateDataStrategys")
-    List<String> getGenerateDataStrategys() {
+    @GetMapping(value = "getGenerateDataStrategies")
+    List<StrategyDTO> getGenerateDataStrategys() {
 
-        List<String> generateDataStrategys;
+        List<StrategyDTO> generateDataStrategys;
 
         generateDataStrategys = allStrategies.stream()
                 .filter(strategy -> strategy.getAcceptableTypeDefinition().equals(generateDataStrategyAcceptableTypeDefinition))
-                .map(strategy -> strategy.getClass().getSimpleName())
+                .map(StrategyDTO::new)
                 .collect(Collectors.toList());
 
         return generateDataStrategys;

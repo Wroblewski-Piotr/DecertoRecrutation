@@ -1,4 +1,4 @@
-package com.decerto.recruit82513.core.model;
+package com.decerto.recruit82513.core.modelAndDTO;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

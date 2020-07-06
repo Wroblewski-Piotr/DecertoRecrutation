@@ -1,6 +1,6 @@
 package com.decerto.recruit82513.strategyImpl.processDataStrategyImpl;
 
-import com.decerto.recruit82513.core.model.TypeDefinition;
+import com.decerto.recruit82513.core.modelAndDTO.TypeDefinition;
 import com.decerto.recruit82513.core.Strategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +28,7 @@ public class AddAnyNumberOfIntegers implements Strategy<List<Integer>, Integer> 
                     .clazz(Integer.class)
                     .build();
 
-    private final String description = "Przyjmuję listę integerów i sumują wszystkie jej pozycje";
+    private final String description = "Przyjmuję listę integerów i sumuje wszystkie jej pozycje";
 
     @Override
     public Integer processData(List<Integer> dataBeforeProcessing) {
@@ -37,8 +37,8 @@ public class AddAnyNumberOfIntegers implements Strategy<List<Integer>, Integer> 
         logger.info("przyjęte dane - " + dataBeforeProcessing.toString());
 
         Integer score = 0;
-        for(int i=0; i<dataBeforeProcessing.size(); i++) {
-            score = score + dataBeforeProcessing.get(i);
+        for(Integer integer: dataBeforeProcessing) {
+            score = score + integer;
         }
 
         logger.info("Wygenerowany objekt - " + score.toString());

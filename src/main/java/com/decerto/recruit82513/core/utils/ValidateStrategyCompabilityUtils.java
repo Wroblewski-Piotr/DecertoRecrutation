@@ -1,7 +1,7 @@
 package com.decerto.recruit82513.core.utils;
 
 import com.decerto.recruit82513.core.Exception.Recruit82513Exception;
-import com.decerto.recruit82513.core.model.TypeDefinition;
+import com.decerto.recruit82513.core.modelAndDTO.TypeDefinition;
 import com.decerto.recruit82513.core.Strategy;
 
 import java.util.LinkedList;

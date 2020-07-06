@@ -1,7 +1,7 @@
 package com.decerto.recruit82513.strategyImpl.processDataStrategyImpl;
 
 import com.decerto.recruit82513.core.Strategy;
-import com.decerto.recruit82513.core.model.TypeDefinition;
+import com.decerto.recruit82513.core.modelAndDTO.TypeDefinition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

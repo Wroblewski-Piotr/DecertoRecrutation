@@ -1,7 +1,7 @@
 package com.decerto.recruit82513.core;
 
 
-import com.decerto.recruit82513.core.model.TypeDefinition;
+import com.decerto.recruit82513.core.modelAndDTO.TypeDefinition;
 
 /**
  * Serwis definiujący warstwę przetwarzania danych

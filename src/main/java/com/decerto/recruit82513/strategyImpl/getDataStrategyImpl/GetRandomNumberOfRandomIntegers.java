@@ -1,7 +1,7 @@
 package com.decerto.recruit82513.strategyImpl.getDataStrategyImpl;
 
-import com.decerto.recruit82513.core.model.Nothing;
-import com.decerto.recruit82513.core.model.TypeDefinition;
+import com.decerto.recruit82513.core.modelAndDTO.Nothing;
+import com.decerto.recruit82513.core.modelAndDTO.TypeDefinition;
 import com.decerto.recruit82513.core.Strategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,7 +1,7 @@
 package com.decerto.recruit82513.strategyImpl.getDataStrategyImpl;
 
-import com.decerto.recruit82513.core.model.Nothing;
-import com.decerto.recruit82513.core.model.TypeDefinition;
+import com.decerto.recruit82513.core.modelAndDTO.Nothing;
+import com.decerto.recruit82513.core.modelAndDTO.TypeDefinition;
 import com.decerto.recruit82513.core.Strategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +32,7 @@ public class GetTwoIntegersFromApi implements Strategy<Nothing, List<Integer>> {
                     )
                     .build();
 
-    private final String description = "Tworzy obiekt typu List na podstawie dwuch Integerów pobranych z zewnętrznego api";
+    private final String description = "Tworzy obiekt typu List na podstawie dwóch Integerów pobranych z zewnętrznego api";
 
     @Override
     public List<Integer> processData(Nothing nothing) {

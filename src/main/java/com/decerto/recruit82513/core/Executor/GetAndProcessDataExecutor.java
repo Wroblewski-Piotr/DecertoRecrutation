@@ -1,7 +1,8 @@
 package com.decerto.recruit82513.core.Executor;
 
-import com.decerto.recruit82513.core.model.Nothing;
-import com.decerto.recruit82513.core.model.StrategyProcessScore;
+import com.decerto.recruit82513.core.modelAndDTO.Nothing;
+import com.decerto.recruit82513.core.modelAndDTO.StrategyDTO;
+import com.decerto.recruit82513.core.modelAndDTO.StrategyProcessScore;
 import com.decerto.recruit82513.core.Strategy;
 import com.decerto.recruit82513.core.utils.GetStrategyByQualifierUtil;
 import com.decerto.recruit82513.core.utils.ValidateStrategyCompabilityUtils;
@@ -34,7 +35,12 @@ public class GetAndProcessDataExecutor {
 
         for(Strategy strategy: strategyList){
             scoreObject = strategy.processData(scoreObject);
-            strategyProcessScores.add(new StrategyProcessScore(strategy.getClass().getSimpleName(), strategy.getStrategyDescription(), scoreObject));
+
+            strategyProcessScores.add(
+                    new StrategyProcessScore(
+                            new StrategyDTO(strategy),
+                            scoreObject)
+            );
         }
 
         return strategyProcessScores;

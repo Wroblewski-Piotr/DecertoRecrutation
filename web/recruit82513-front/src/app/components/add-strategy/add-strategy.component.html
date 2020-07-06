@@ -1,0 +1,34 @@
+<div style="padding-bottom: 30px; margin-bottom: 30px; border-bottom: 2px solid #ffc107">
+  <div *ngIf="parentComponent.selectedStrategiesChain.length == 0" style="margin-top: 10px;">
+    Strategie pozyskiwania danych :
+  </div>
+
+  <div *ngIf="parentComponent.selectedStrategiesChain.length != 0">
+    Strategie kompatybilne do strategi :
+    <div style="margin-top: 10px;">
+      nazwa - {{parentComponent.selectedStrategiesChain[parentComponent.selectedStrategiesChain.length-1].strategyDto.qualifier}}
+      <br>
+      opis - {{parentComponent.selectedStrategiesChain[parentComponent.selectedStrategiesChain.length-1].strategyDto.description}}
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="!parentComponent.isCompatybilesStrategiesLoading">
+  <div *ngFor="let strategy of parentComponent.compatybilesStrategies"
+    style="display: flex; padding-bottom: 30px; margin-bottom: 30px; border-bottom: 2px solid #ffc107">
+    <div style="width: 80%;">
+      nazwa - {{strategy.qualifier}}
+      <br>
+      opis - {{strategy.description}}
+    </div>
+    <div style="width: 15%; display: flex; align-items: center;"
+      (click)="parentComponent.addToselectedStrategiesChain(strategy)" class="btn btn-success">
+      <div style="margin: auto;">Dodaj</div>
+    </div>
+  </div>
+</ng-container>
+
+<app-spinner
+  [beforeSpinnerMessage]="'trwa ładowanie'"
+  [showSpinner]="parentComponent.isCompatybilesStrategiesLoading">
+</app-spinner>

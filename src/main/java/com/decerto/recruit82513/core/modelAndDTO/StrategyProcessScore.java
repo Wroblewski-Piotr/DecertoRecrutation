@@ -1,4 +1,4 @@
-package com.decerto.recruit82513.core.model;
+package com.decerto.recruit82513.core.modelAndDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,7 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class StrategyProcessScore {
-    String strategyQualifier;
-    String description;
+    StrategyDTO strategyDTO;
     Object processScore;
 }

@@ -1,0 +1,20 @@
+<div style="display: flex; margin-bottom: 30px"
+  [style]="!amILast() ? 'border-bottom: 2px solid #ffc107; padding-bottom: 30px' : ''">
+  <div style="width: 80%;">
+    nazwa - {{strategyProcessScore.strategyDto.qualifier}}
+    <br>
+    opis - {{strategyProcessScore.strategyDto.description}}
+
+    <div *ngIf="strategyProcessScore.processScore != null">
+      <b>Wynik operacji</b> -
+      <br>
+      {{strategyProcessScore.processScore | json}}
+    </div>
+
+  </div>
+
+  <div style="width: 20%; height: 50px; display: flex; align-items: center;" class="btn btn-danger"
+  (click)="parentComponent.deleteStrategyFromStrategiesChain(strategyProcessScore)" *ngIf="amILast() && !parentComponent.isItExecuted()">
+    <div style="margin: auto;">Usuń</div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<ul *ngIf="objectList != null && showSpinner != true" [ngClass]="listClass">
+  <li *ngFor="let object of objectList">
+    <MPW-CMS-component-supplier
+        [deliverableComponentEnum]="deliverableComponentEnum"
+        [importParameters]="createExportParameters(object)">
+      </MPW-CMS-component-supplier>
+  </li>
+</ul>
+
+<app-spinner
+  [spinnerClassName]='spinnerClassName'
+  [beforeSpinnerMessage]="beforeSpinnerMessage"
+  [showSpinner]="showSpinner">
+</app-spinner>

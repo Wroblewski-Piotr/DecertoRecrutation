@@ -1,0 +1,5 @@
+<div class="flex-box-container-spinner" *ngIf="showSpinner">
+  <div style="padding-right: 10px">{{beforeSpinnerMessage}}</div>
+  <div [ngClass]="spinnerClassName"></div>
+</div>
+<span *ngIf="!showSpinner">{{textWheneSpinnerNotActive}}</span>
