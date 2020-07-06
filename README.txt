@@ -1,3 +1,8 @@
+Autor projektu - Piotr Wróblewski
+email - wroblewskipiotr89@gmail.com
+tel - 668147160
+
+
 Treść Zadania - 
 
 Uprzejmie proszę o napisanie aplikacji, której zadaniem jest łączenie
@@ -46,5 +51,5 @@ Uwagi autora -
 4) Aplikacja pozwala na tworzenie łańcucha wielu strategi (pod warunkiem ich kompatybilności pod względem zwracanego i przyjmowanego typu)	
 
 Backend aplikacji został wykonany przy pmocy javy 8 oraz frameworka SpringBoot 2.3.1
-Frontend aplikacji został wykonany przy pomocy frameworka  Angular 9
+Frontend aplikacji został wykonany przy pomocy frameworka Angular 9
 	
